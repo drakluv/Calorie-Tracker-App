@@ -1,0 +1,63 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:black;
+  color:white;
+}
+
+/* TOP */
+.top{
+  padding:15px;
+}
+
+.calories{
+  margin-top:10px;
+}
+
+.bar{
+  height:10px;
+  background:#333;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+#barFill{
+  height:100%;
+  width:0%;
+  background:#38bdf8;
+}
+
+/* LIST */
+#dailyList{
+  padding:15px;
+}
+
+/* FLOAT BUTTON */
+#addBtn{
+  position:fixed;
+  bottom:70px;
+  right:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  font-size:30px;
+  background:#38bdf8;
+  border:none;
+}
+
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  background:#111;
+}
+
+.nav button{
+  flex:1;
+  padding:15px;
+  background:none;
+  color:white;
+  border:none;
+}

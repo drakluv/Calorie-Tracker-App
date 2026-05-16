@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calorie App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- TOP HEADER -->
+<div class="top">
+  <div id="date">Today</div>
+
+  <div class="calories">
+    <div id="calLeft">0 kcal left</div>
+    <div class="bar">
+      <div id="barFill"></div>
+    </div>
+    <div class="cal-info">
+      <span id="calEaten">0</span>
+      <span id="calGoal">2500</span>
+    </div>
+  </div>
+</div>
+
+<!-- DAILY LIST -->
+<div id="dailyList"></div>
+
+<!-- FLOAT BUTTON -->
+<button id="addBtn">+</button>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <button onclick="showTab('daily')">Daily</button>
+  <button onclick="showTab('food')">Food</button>
+  <button onclick="showTab('me')">Me</button>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
