@@ -1,42 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calorie App</title>
-<link rel="stylesheet" href="style.css">
-</head>
+
 
 <body>
+">
 
-<div id="app">
+<div id="date">Today</div>
 
-<!-- TOP HEADER -->
-<div class="top">
-  <div id="date">Today</div>
+<div class="calories">
 
-  <div class="calories">
-    <div id="calLeft">0 kcal left</div>
-    <div class="bar">
-      <div id="barFill"></div>
-    </div>
-    <div class="cal-info">
-      <span id="calEaten">0</span>
-      <span id="calGoal">2500</span>
-    </div>
-  </div>
+<div id="calLeft">0 kcal left</div>
+
+<div class="bar">
+<div id="barFill"></div>
 </div>
 
-<!-- DAILY LIST -->
+<div class="cal-info">
+<span id="calEaten">0 eaten</span>
+<span id="calGoal">2500 goal</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- TABS -->
+<div id="dailyTab" class="tab active">
+
+<h2>Daily Foods</h2>
+
 <div id="dailyList"></div>
 
-<!-- FLOAT BUTTON -->
-<button id="addBtn">+</button>
+<h2>Meal Templates</h2>
 
-<!-- BOTTOM NAV -->
+<div id="mealTemplates"></div>
+
+</div>
+
+<div id="foodTab" class="tab">
+
+<h2>Add Food</h2>
+
+<input id="foodName" placeholder="Food name">
+<input id="foodCalories" type="number" placeholder="Calories">
+
+<button onclick="manualAddFood()">Add Food</button>
+
+</div>
+
+<div id="meTab" class="tab">
+
+<h2>Weight Tracking</h2>
+
+<input id="weightInput" type="number" placeholder="Weight kg">
+
+<button onclick="addWeight()">Add Weight</button>
+
+<div id="weightList"></div>
+
+</div>
+
+<!-- FLOATING BUTTON -->
+<button id="addBtn" onclick="quickAddMeal()">+</button>
+
+<!-- NAV -->
 <div class="nav">
-  <button onclick="showTab('daily')">Daily</button>
-  <button onclick="showTab('food')">Food</button>
-  <button onclick="showTab('me')">Me</button>
+<button onclick="showTab('daily')">Daily</button>
+<button onclick="showTab('food')">Food</button>
+<button onclick="showTab('me')">Me</button>
 </div>
 
 </div>
