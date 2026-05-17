@@ -472,3 +472,170 @@ function showTab(tab){
 /* START */
 
 updateUI();
+/* MODAL */
+
+function openModal(){
+
+    document.getElementById("modalOverlay")
+    .style.display = "flex";
+
+    renderQuickFoods();
+
+}
+
+function closeModal(){
+
+    document.getElementById("modalOverlay")
+    .style.display = "none";
+
+}
+
+/* QUICK SECTIONS */
+
+function showQuickSection(section){
+
+    document.getElementById("existingSection")
+    .style.display = "none";
+
+    document.getElementById("manualSection")
+    .style.display = "none";
+
+    document.getElementById("templateSection")
+    .style.display = "none";
+
+    if(section === "existing"){
+
+        document.getElementById("existingSection")
+        .style.display = "block";
+
+    }
+
+    if(section === "manual"){
+
+        document.getElementById("manualSection")
+        .style.display = "block";
+
+    }
+
+    if(section === "template"){
+
+        document.getElementById("templateSection")
+        .style.display = "block";
+
+    }
+
+}
+
+/* QUICK FOOD SEARCH */
+
+document.getElementById("quickSearch")
+.addEventListener("input", renderQuickFoods);
+
+function renderQuickFoods(){
+
+    let html = "";
+
+    const search =
+    document.getElementById("quickSearch")
+    .value
+    .toLowerCase();
+
+    const filteredFoods =
+    foodDatabase.filter(food=>
+        food.name.toLowerCase().includes(search)
+    );
+
+    filteredFoods.forEach(food=>{
+
+        html += `
+        <div class="quick-food">
+
+        <strong>${food.name}</strong>
+
+        <div>${food.calories} kcal</div>
+
+        <button onclick="eatFood(${food.id})">
+
+        Add To Day
+
+        </button>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("quickFoodResults")
+    .innerHTML = html;
+
+}
+
+/* QUICK CREATE FOOD */
+
+function quickCreateFood(){
+
+    const food = {
+
+        id:Date.now(),
+
+        name:
+        document.getElementById("quickFoodName")
+        .value,
+
+        calories:Number(
+            document.getElementById("quickFoodCalories")
+            .value
+        ),
+
+        protein:Number(
+            document.getElementById("quickFoodProtein")
+            .value
+        ),
+
+        carbs:Number(
+            document.getElementById("quickFoodCarbs")
+            .value
+        ),
+
+        fat:Number(
+            document.getElementById("quickFoodFat")
+            .value
+        )
+
+    };
+
+    foodDatabase.push(food);
+
+    saveAll();
+
+    renderDatabase();
+
+    closeModal();
+
+}
+
+/* CREATE TEMPLATE */
+
+function createTemplate(){
+
+    const templateName =
+    document.getElementById("templateName")
+    .value;
+
+    const template = {
+
+        name:templateName,
+
+        foods:[...dailyFoods]
+
+    };
+
+    templates.push(template);
+
+    saveAll();
+
+    renderTemplates();
+
+    closeModal();
+
+}
