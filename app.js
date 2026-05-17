@@ -602,7 +602,6 @@ function showQuickSection(section){
 
 document.getElementById("quickSearch")
 .addEventListener("input", renderQuickFoods);
-
 function renderQuickFoods(){
 
     let html = "";
@@ -624,7 +623,7 @@ function renderQuickFoods(){
 
         <strong>${food.name}</strong>
 
-        <div>${food.calories} kcal</div>
+        <div>${food.caloriesPer100} kcal /100g</div>
 
         <button onclick="eatFood(${food.id})">
 
@@ -641,7 +640,6 @@ function renderQuickFoods(){
     .innerHTML = html;
 
 }
-
 /* QUICK CREATE FOOD */
 
 function quickCreateFood(){
