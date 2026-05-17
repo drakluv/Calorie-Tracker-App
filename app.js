@@ -258,20 +258,58 @@ function renderDatabase(){
 }
 
 /* ADD TO DAILY */
-
 function eatFood(id){
+
+    const grams =
+    Number(prompt("How many grams?"));
+
+    if(!grams) return;
+
+    const meal =
+    prompt(
+        "Meal type: breakfast, lunch, dinner or snack"
+    );
 
     const food =
     foodDatabase.find(food => food.id === id);
 
-    dailyFoods.push({...food});
+    const multiplier = grams / 100;
+
+    const trackedFood = {
+
+        id:Date.now(),
+
+        originalId:food.id,
+
+        name:food.name,
+
+        grams:grams,
+
+        meal:meal,
+
+        date:new Date().toLocaleDateString(),
+
+        calories:
+        Math.round(food.caloriesPer100 * multiplier),
+
+        protein:
+        Math.round(food.proteinPer100 * multiplier),
+
+        carbs:
+        Math.round(food.carbsPer100 * multiplier),
+
+        fat:
+        Math.round(food.fatPer100 * multiplier)
+
+    };
+
+    dailyFoods.push(trackedFood);
 
     saveAll();
 
     updateUI();
 
 }
-
 /* DELETE DATABASE FOOD */
 
 function deleteDatabaseFood(id){
