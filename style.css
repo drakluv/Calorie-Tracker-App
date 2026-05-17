@@ -21,7 +21,7 @@ body{
 }
 
 #date{
-    font-size:28px;
+    font-size:2rem;
     font-weight:bold;
     margin-bottom:20px;
 }
@@ -29,7 +29,7 @@ body{
 .calories{
     background:#1e293b;
     padding:18px;
-    border-radius:18px;
+    border-radius:20px;
 }
 
 #calLeft{
@@ -46,8 +46,8 @@ body{
 }
 
 #barFill{
-    height:100%;
     width:0%;
+    height:100%;
     background:#38bdf8;
     border-radius:20px;
 }
@@ -70,9 +70,11 @@ body{
     display:block;
 }
 
+/* TITLES */
+
 h2{
     margin-bottom:15px;
-    font-size:1.3rem;
+    font-size:1.2rem;
 }
 
 /* INPUTS */
@@ -116,21 +118,14 @@ button{
 .template-card{
     background:#1e293b;
     padding:16px;
-    border-radius:16px;
+    border-radius:18px;
     margin-bottom:12px;
-}
-
-.template-card strong{
-    font-size:1.05rem;
 }
 
 .delete-btn{
     margin-top:12px;
     background:#ef4444 !important;
     color:white !important;
-    padding:12px !important;
-    width:100%;
-    border-radius:12px;
 }
 
 /* FLOAT BUTTON */
@@ -169,23 +164,22 @@ button{
     font-size:1rem;
 }
 
-/* MOBILE OPTIMIZATION */
+/* MOBILE */
 
 @media(max-width:700px){
-
-    #date{
-        font-size:24px;
-    }
 
     .top,
     .tab{
         padding:15px;
     }
 
+    #date{
+        font-size:1.8rem;
+    }
+
     #addBtn{
         width:60px;
         height:60px;
-        font-size:1.8rem;
     }
 
 }
