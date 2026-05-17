@@ -1,26 +1,85 @@
 let calorieGoal = 2500;
-
 let proteinGoal = 150;
-
 let carbGoal = 250;
-
 let fatGoal = 70;
 
-let foods = JSON.parse(localStorage.getItem("foods")) || [];
+/* REAL DATABASE */
 
-let weights = JSON.parse(localStorage.getItem("weights")) || [];
+let foodDatabase =
+JSON.parse(localStorage.getItem("foodDatabase")) || [];
 
-let templates = JSON.parse(localStorage.getItem("templates")) || [];
+/* DAILY TRACKING */
+
+let dailyFoods =
+JSON.parse(localStorage.getItem("dailyFoods")) || [];
+
+/* WEIGHTS */
+
+let weights =
+JSON.parse(localStorage.getItem("weights")) || [];
+
+/* TEMPLATES */
+
+let templates =
+JSON.parse(localStorage.getItem("templates")) || [
+
+{
+    name:"Standard Breakfast",
+
+    foods:[
+        {
+            name:"Greek Yoghurt",
+            calories:180,
+            protein:20,
+            carbs:8,
+            fat:4
+        },
+
+        {
+            name:"Oats",
+            calories:230,
+            protein:8,
+            carbs:38,
+            fat:5
+        },
+
+        {
+            name:"Banana",
+            calories:100,
+            protein:1,
+            carbs:25,
+            fat:0
+        }
+    ]
+}
+
+];
 
 function saveAll(){
 
-    localStorage.setItem("foods", JSON.stringify(foods));
+    localStorage.setItem(
+        "foodDatabase",
+        JSON.stringify(foodDatabase)
+    );
 
-    localStorage.setItem("weights", JSON.stringify(weights));
+    localStorage.setItem(
+        "dailyFoods",
+        JSON.stringify(dailyFoods)
+    );
 
-    localStorage.setItem("templates", JSON.stringify(templates));
+    localStorage.setItem(
+        "weights",
+        JSON.stringify(weights)
+    );
+
+    localStorage.setItem(
+        "templates",
+        JSON.stringify(templates)
+    );
 
 }
+
+/* TOTALS */
 
 function totals(){
 
@@ -31,7 +90,7 @@ function totals(){
         fat:0
     };
 
-    foods.forEach(food=>{
+    dailyFoods.forEach(food=>{
 
         total.calories += food.calories;
         total.protein += food.protein;
@@ -43,6 +102,8 @@ function totals(){
     return total;
 
 }
+
+/* UI */
 
 function updateUI(){
 
@@ -62,15 +123,17 @@ function updateUI(){
 
     updateMacros(total);
 
-    renderFoods();
+    renderDailyFoods();
+
+    renderDatabase();
 
     renderWeights();
 
     renderTemplates();
 
-    renderDatabase();
-
 }
+
+/* MACROS */
 
 function updateMacros(total){
 
@@ -103,23 +166,104 @@ function updateMacros(total){
 
 }
 
+/* DATABASE */
+
 function manualAddFood(){
 
     const food = {
 
+        id:Date.now(),
+
         name:document.getElementById("foodName").value,
 
-        calories:Number(document.getElementById("foodCalories").value),
+        calories:Number(
+            document.getElementById("foodCalories").value
+        ),
 
-        protein:Number(document.getElementById("foodProtein").value),
+        protein:Number(
+            document.getElementById("foodProtein").value
+        ),
 
-        carbs:Number(document.getElementById("foodCarbs").value),
+        carbs:Number(
+            document.getElementById("foodCarbs").value
+        ),
 
-        fat:Number(document.getElementById("foodFat").value)
+        fat:Number(
+            document.getElementById("foodFat").value
+        )
 
     };
 
-    foods.push(food);
+    foodDatabase.push(food);
+
+    saveAll();
+
+    renderDatabase();
+
+}
+
+/* RENDER DATABASE */
+
+function renderDatabase(){
+
+    let html = "";
+
+    const search =
+    document.getElementById("searchFood").value
+    .toLowerCase();
+
+    const filteredFoods = foodDatabase.filter(food=>
+        food.name.toLowerCase().includes(search)
+    );
+
+    filteredFoods.forEach((food,index)=>{
+
+        html += `
+        <div class="food-card">
+
+        <strong>${food.name}</strong>
+
+        <div>${food.calories} kcal</div>
+
+        <div>${food.protein}g protein</div>
+
+        <div>${food.carbs}g carbs</div>
+
+        <div>${food.fat}g fat</div>
+
+        <br>
+
+        <button onclick="eatFood(${food.id})">
+
+        Add To Day
+
+        </button>
+
+        <button class="delete-btn"
+        onclick="deleteDatabaseFood(${food.id})">
+
+        Delete
+
+        </button>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("foodDatabase").innerHTML =
+    html;
+
+}
+
+/* ADD TO DAILY */
+
+function eatFood(id){
+
+    const food =
+    foodDatabase.find(food => food.id === id);
+
+    dailyFoods.push({...food});
 
     saveAll();
 
@@ -127,11 +271,26 @@ function manualAddFood(){
 
 }
 
-function renderFoods(){
+/* DELETE DATABASE FOOD */
+
+function deleteDatabaseFood(id){
+
+    foodDatabase =
+    foodDatabase.filter(food => food.id !== id);
+
+    saveAll();
+
+    updateUI();
+
+}
+
+/* DAILY FOODS */
+
+function renderDailyFoods(){
 
     let html = "";
 
-    foods.forEach((food,index)=>{
+    dailyFoods.forEach((food,index)=>{
 
         html += `
         <div class="food-card">
@@ -147,7 +306,7 @@ function renderFoods(){
         <div>${food.fat}g fat</div>
 
         <button class="delete-btn"
-        onclick="deleteFood(${index})">
+        onclick="deleteDailyFood(${index})">
 
         Delete
 
@@ -158,13 +317,16 @@ function renderFoods(){
 
     });
 
-    document.getElementById("dailyList").innerHTML = html;
+    document.getElementById("dailyList").innerHTML =
+    html;
 
 }
 
-function deleteFood(index){
+/* DELETE DAILY FOOD */
 
-    foods.splice(index,1);
+function deleteDailyFood(index){
+
+    dailyFoods.splice(index,1);
 
     saveAll();
 
@@ -172,25 +334,21 @@ function deleteFood(index){
 
 }
 
-function renderDatabase(){
+/* WEIGHTS */
 
-    let html = "";
+function addWeight(){
 
-    foods.forEach(food=>{
+    weights.push({
 
-        html += `
-        <div class="food-card">
+        date:new Date().toLocaleDateString(),
 
-        <strong>${food.name}</strong>
-
-        <div>${food.calories} kcal</div>
-
-        </div>
-        `;
+        value:document.getElementById("weightInput").value
 
     });
 
-    document.getElementById("foodDatabase").innerHTML = html;
+    saveAll();
+
+    renderWeights();
 
 }
 
@@ -210,25 +368,12 @@ function renderWeights(){
 
     });
 
-    document.getElementById("weightList").innerHTML = html;
+    document.getElementById("weightList").innerHTML =
+    html;
 
 }
 
-function addWeight(){
-
-    weights.push({
-
-        date:new Date().toLocaleDateString(),
-
-        value:document.getElementById("weightInput").value
-
-    });
-
-    saveAll();
-
-    updateUI();
-
-}
+/* TEMPLATES */
 
 function renderTemplates(){
 
@@ -236,12 +381,30 @@ function renderTemplates(){
 
     templates.forEach((template,index)=>{
 
+        let foodsHTML = "";
+
+        template.foods.forEach(food=>{
+
+            foodsHTML += `
+            <div>
+
+            ${food.name}
+
+            </div>
+            `;
+
+        });
+
         html += `
         <div class="template-card">
 
         <strong>${template.name}</strong>
 
-        <div>${template.calories} kcal</div>
+        <br><br>
+
+        ${foodsHTML}
+
+        <br>
 
         <button onclick="addTemplate(${index})">
 
@@ -254,13 +417,18 @@ function renderTemplates(){
 
     });
 
-    document.getElementById("mealTemplates").innerHTML = html;
+    document.getElementById("mealTemplates").innerHTML =
+    html;
 
 }
 
 function addTemplate(index){
 
-    foods.push(templates[index]);
+    templates[index].foods.forEach(food=>{
+
+        dailyFoods.push({...food});
+
+    });
 
     saveAll();
 
@@ -268,11 +436,22 @@ function addTemplate(index){
 
 }
 
+/* SEARCH */
+
+document.getElementById("searchFood")
+.addEventListener("input", renderDatabase);
+
+/* FLOAT BUTTON */
+
 function quickAddMeal(){
 
-    alert("Popup system comes next.");
+    alert(
+        "Next step = real popup menu system."
+    );
 
 }
+
+/* NAVIGATION */
 
 function showTab(tab){
 
@@ -289,5 +468,7 @@ function showTab(tab){
     .classList.add("active");
 
 }
+
+/* START */
 
 updateUI();
