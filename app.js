@@ -325,43 +325,75 @@ function deleteDatabaseFood(id){
 }
 
 /* DAILY FOODS */
-
 function renderDailyFoods(){
 
     let html = "";
 
-    dailyFoods.forEach((food,index)=>{
+    const groupedMeals = {
 
-        html += `
-        <div class="food-card">
+        breakfast:[],
 
-        <strong>${food.name}</strong>
+        lunch:[],
 
-        <div>${food.calories} kcal</div>
+        dinner:[],
 
-        <div>${food.protein}g protein</div>
+        snack:[]
 
-        <div>${food.carbs}g carbs</div>
+    };
 
-        <div>${food.fat}g fat</div>
+    dailyFoods.forEach(food=>{
 
-        <button class="delete-btn"
-        onclick="deleteDailyFood(${index})">
+        if(groupedMeals[food.meal]){
 
-        Delete
+            groupedMeals[food.meal].push(food);
 
-        </button>
-
-        </div>
-        `;
+        }
 
     });
 
-    document.getElementById("dailyList").innerHTML =
-    html;
+    for(const mealType in groupedMeals){
+
+        html += `
+        <h2 style="margin-top:20px;">
+        ${mealType}
+        </h2>
+        `;
+
+        groupedMeals[mealType].forEach((food,index)=>{
+
+            html += `
+            <div class="food-card">
+
+            <strong>${food.name}</strong>
+
+            <div>${food.grams}g</div>
+
+            <div>${food.calories} kcal</div>
+
+            <div>${food.protein}g protein</div>
+
+            <div>${food.carbs}g carbs</div>
+
+            <div>${food.fat}g fat</div>
+
+            <button class="delete-btn"
+            onclick="deleteDailyFood(${index})">
+
+            Delete
+
+            </button>
+
+            </div>
+            `;
+
+        });
+
+    }
+
+    document.getElementById("dailyList")
+    .innerHTML = html;
 
 }
-
 /* DELETE DAILY FOOD */
 
 function deleteDailyFood(index){
