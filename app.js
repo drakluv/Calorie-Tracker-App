@@ -210,27 +210,29 @@ function renderDatabase(){
     let html = "";
 
     const search =
-    document.getElementById("searchFood").value
+    document.getElementById("searchFood")
+    .value
     .toLowerCase();
 
-    const filteredFoods = foodDatabase.filter(food=>
+    const filteredFoods =
+    foodDatabase.filter(food=>
         food.name.toLowerCase().includes(search)
     );
 
-    filteredFoods.forEach((food,index)=>{
+    filteredFoods.forEach(food=>{
 
         html += `
         <div class="food-card">
 
         <strong>${food.name}</strong>
 
-        <div>${food.calories} kcal</div>
+        <div>${food.caloriesPer100} kcal /100g</div>
 
-        <div>${food.protein}g protein</div>
+        <div>${food.proteinPer100}g protein</div>
 
-        <div>${food.carbs}g carbs</div>
+        <div>${food.carbsPer100}g carbs</div>
 
-        <div>${food.fat}g fat</div>
+        <div>${food.fatPer100}g fat</div>
 
         <br>
 
@@ -252,11 +254,10 @@ function renderDatabase(){
 
     });
 
-    document.getElementById("foodDatabase").innerHTML =
-    html;
+    document.getElementById("foodDatabase")
+    .innerHTML = html;
 
 }
-
 /* ADD TO DAILY */
 function eatFood(id){
 
