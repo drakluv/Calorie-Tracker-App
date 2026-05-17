@@ -641,7 +641,6 @@ function renderQuickFoods(){
 
 }
 /* QUICK CREATE FOOD */
-
 function quickCreateFood(){
 
     const food = {
@@ -652,22 +651,22 @@ function quickCreateFood(){
         document.getElementById("quickFoodName")
         .value,
 
-        calories:Number(
+        caloriesPer100:Number(
             document.getElementById("quickFoodCalories")
             .value
         ),
 
-        protein:Number(
+        proteinPer100:Number(
             document.getElementById("quickFoodProtein")
             .value
         ),
 
-        carbs:Number(
+        carbsPer100:Number(
             document.getElementById("quickFoodCarbs")
             .value
         ),
 
-        fat:Number(
+        fatPer100:Number(
             document.getElementById("quickFoodFat")
             .value
         )
@@ -683,7 +682,6 @@ function quickCreateFood(){
     closeModal();
 
 }
-
 /* CREATE TEMPLATE */
 
 function createTemplate(){
