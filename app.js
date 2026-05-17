@@ -174,21 +174,22 @@ function manualAddFood(){
 
         id:Date.now(),
 
-        name:document.getElementById("foodName").value,
+        name:
+        document.getElementById("foodName").value,
 
-        calories:Number(
+        caloriesPer100:Number(
             document.getElementById("foodCalories").value
         ),
 
-        protein:Number(
+        proteinPer100:Number(
             document.getElementById("foodProtein").value
         ),
 
-        carbs:Number(
+        carbsPer100:Number(
             document.getElementById("foodCarbs").value
         ),
 
-        fat:Number(
+        fatPer100:Number(
             document.getElementById("foodFat").value
         )
 
