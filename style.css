@@ -5,19 +5,27 @@ body{
   color:white;
 }
 
-/* TOP */
+#app{
+  padding-bottom:90px;
+}
+
 .top{
-  padding:15px;
+  padding:20px;
+}
+
+#date{
+  font-size:24px;
+  font-weight:bold;
 }
 
 .calories{
-  margin-top:10px;
+  margin-top:20px;
 }
 
 .bar{
-  height:10px;
-  background:#333;
-  border-radius:10px;
+  height:12px;
+  background:#222;
+  border-radius:20px;
   overflow:hidden;
 }
 
@@ -27,37 +35,21 @@ body{
   background:#38bdf8;
 }
 
-/* LIST */
-#dailyList{
-  padding:15px;
-}
-
-/* FLOAT BUTTON */
-#addBtn{
-  position:fixed;
-  bottom:70px;
-  right:20px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  font-size:30px;
-  background:#38bdf8;
-  border:none;
-}
-
-/* NAV */
-.nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
+.cal-info{
   display:flex;
-  background:#111;
+  justify-content:space-between;
+  margin-top:8px;
+  color:#999;
 }
 
-.nav button{
-  flex:1;
-  padding:15px;
-  background:none;
-  color:white;
-  border:none;
+.tab{
+  display:none;
+  padding:20px;
+}
+
+.active{
+  display:block;
+}
+
+input{
 }
