@@ -209,6 +209,81 @@ Create Current Day As Template
 
 </div>
 
+<!-- MODAL -->
+
+<div id="modalOverlay">
+
+<div id="modal">
+
+<h2>Quick Add</h2>
+
+<button onclick="showQuickSection('existing')">
+Add Existing Food
+</button>
+
+<button onclick="showQuickSection('manual')">
+Add New Food
+</button>
+
+<button onclick="showQuickSection('template')">
+Create Meal Template
+</button>
+
+<button onclick="closeModal()" class="close-btn">
+Close
+</button>
+
+<!-- EXISTING FOOD -->
+
+<div id="existingSection" class="quick-section">
+
+<input id="quickSearch" placeholder="Search food">
+
+<div id="quickFoodResults"></div>
+
+</div>
+
+<!-- MANUAL FOOD -->
+
+<div id="manualSection" class="quick-section">
+
+<input id="quickFoodName" placeholder="Food name">
+
+<input id="quickFoodCalories" type="number"
+placeholder="Calories">
+
+<input id="quickFoodProtein" type="number"
+placeholder="Protein">
+
+<input id="quickFoodCarbs" type="number"
+placeholder="Carbs">
+
+<input id="quickFoodFat" type="number"
+placeholder="Fat">
+
+<button onclick="quickCreateFood()">
+Create Food
+</button>
+
+</div>
+
+<!-- TEMPLATE -->
+
+<div id="templateSection" class="quick-section">
+
+<input id="templateName"
+placeholder="Template Name">
+
+<button onclick="createTemplate()">
+Create Current Day As Template
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 <!-- NAV -->
 
 <div class="nav">
