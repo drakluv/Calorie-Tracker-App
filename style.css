@@ -237,3 +237,45 @@ button{
     }
 
 }
+/* MODAL */
+
+#modalOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:flex-end;
+    z-index:2000;
+}
+
+#modal{
+    width:100%;
+    background:#1e293b;
+    border-radius:25px 25px 0 0;
+    padding:20px;
+    max-height:85vh;
+    overflow-y:auto;
+}
+
+.quick-section{
+    display:none;
+    margin-top:20px;
+}
+
+.close-btn{
+    background:#ef4444 !important;
+    color:white !important;
+    margin-top:10px;
+}
+
+.quick-food{
+    background:#334155;
+    padding:15px;
+    border-radius:14px;
+    margin-top:10px;
+}
+
+.quick-food button{
+    margin-top:10px;
+}
