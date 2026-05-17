@@ -1,13 +1,25 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calorie App</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
 <body>
-">
+
+<div id="app">
+
+<!-- TOP -->
+
+<div class="top">
 
 <div id="date">Today</div>
 
 <div class="calories">
 
-<div id="calLeft">0 kcal left</div>
+<div id="calLeft">2500 kcal left</div>
 
 <div class="bar">
 <div id="barFill"></div>
@@ -22,7 +34,8 @@
 
 </div>
 
-<!-- TABS -->
+<!-- DAILY TAB -->
+
 <div id="dailyTab" class="tab active">
 
 <h2>Daily Foods</h2>
@@ -35,16 +48,29 @@
 
 </div>
 
+<!-- FOOD TAB -->
+
 <div id="foodTab" class="tab">
 
 <h2>Add Food</h2>
 
 <input id="foodName" placeholder="Food name">
+
 <input id="foodCalories" type="number" placeholder="Calories">
 
-<button onclick="manualAddFood()">Add Food</button>
+<button onclick="manualAddFood()">
+Add Food
+</button>
+
+<br><br>
+
+<h2>Food Database</h2>
+
+<div id="foodDatabase"></div>
 
 </div>
+
+<!-- ME TAB -->
 
 <div id="meTab" class="tab">
 
@@ -52,24 +78,43 @@
 
 <input id="weightInput" type="number" placeholder="Weight kg">
 
-<button onclick="addWeight()">Add Weight</button>
+<button onclick="addWeight()">
+Add Weight
+</button>
+
+<br><br>
 
 <div id="weightList"></div>
 
 </div>
 
 <!-- FLOATING BUTTON -->
-<button id="addBtn" onclick="quickAddMeal()">+</button>
+
+<button id="addBtn" onclick="quickAddMeal()">
++
+</button>
 
 <!-- NAV -->
+
 <div class="nav">
-<button onclick="showTab('daily')">Daily</button>
-<button onclick="showTab('food')">Food</button>
-<button onclick="showTab('me')">Me</button>
+
+<button onclick="showTab('daily')">
+Daily
+</button>
+
+<button onclick="showTab('food')">
+Food
+</button>
+
+<button onclick="showTab('me')">
+Me
+</button>
+
 </div>
 
 </div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
