@@ -1,56 +1,37 @@
 let goal = 2500;
-let eaten = 0;
+
 let foods = JSON.parse(localStorage.getItem("foods")) || [];
 
-function updateUI(){
+let weights = JSON.parse(localStorage.getItem("weights")) || [];
 
-  document.getElementById("calGoal").innerText = goal;
-  document.getElementById("calEaten").innerText = eaten;
+let templates = JSON.parse(localStorage.getItem("templates")) || [
+  {
+    name:"Standard Breakfast",
+    calories:620,
+    items:[
+      "210g Greek yoghurt",
+      "60g oats",
+      "110g banana"
+    ]
+  }
+];
 
-  let left = goal - eaten;
-  document.getElementById("calLeft").innerText = left + " kcal left";
-
-  let percent = (eaten / goal) * 100;
-  document.getElementById("barFill").style.width = percent + "%";
-
-  renderDaily();
-}
-
-function addFood(name, cal){
-
-  foods.push({name, cal});
-  eaten += cal;
+function saveAll(){
 
   localStorage.setItem("foods", JSON.stringify(foods));
 
-  updateUI();
+  localStorage.setItem("weights", JSON.stringify(weights));
+
+  localStorage.setItem("templates", JSON.stringify(templates));
+
 }
 
-function renderDaily(){
+function getCalories(){
 
-  let html = "";
+  let total = 0;
 
-  foods.forEach((f, i)=>{
-
-    html += `
-      <div style="padding:10px;background:#222;margin:5px;">
-        ${f.name} - ${f.cal} kcal
-        <button onclick="deleteFood(${i})">X</button>
-      </div>
-    `;
+  foods.forEach(food=>{
+    total += food.calories;
   });
-
-  document.getElementById("dailyList").innerHTML = html;
-}
-
-function deleteFood(index){
-
-  eaten -= foods[index].cal;
-  foods.splice(index,1);
-
-  localStorage.setItem("foods", JSON.stringify(foods));
-
-  updateUI();
-}
 
 updateUI();
